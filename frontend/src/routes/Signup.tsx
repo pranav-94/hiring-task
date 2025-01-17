@@ -16,11 +16,12 @@ const Signup = () => {
         username,
         password,
       });
-      
-      if(response.data.msg === "User Created") {
+        localStorage.setItem('id',response.data.data.id)
+        console.log(response.data.data.id)
         setSuccess('Signup successful! Redirecting to login...');
-        setTimeout(() => navigate('/login'), 2000); // Redirect after 2 seconds
-      }
+        navigate('/login')
+
+        
     } catch (error) {
       setError('Signup failed. Please try again.');
       console.error('Error during signup:', error);

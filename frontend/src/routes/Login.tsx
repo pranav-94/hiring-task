@@ -17,6 +17,7 @@ const Login = () => {
       });
       const { token } = response.data; 
       localStorage.setItem('jwt', token);
+      localStorage.setItem('id',response.data.userId)
       console.log('Login successful, token:', token);
       navigate('/home');
     } catch (error) {
