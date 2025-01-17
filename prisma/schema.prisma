@@ -14,8 +14,8 @@ datasource db {
 }
 
 model Todo {
-  id            Int      @id @default(autoincrement())
-  title         String   @unique
+  id            Int     @unique @id @default(autoincrement())
+  title         String   
   description   String
   status        Boolean
   dueDate       String

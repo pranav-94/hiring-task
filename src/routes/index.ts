@@ -34,7 +34,7 @@ appRouter.get('/get',async(req,res)=>{
 
     const Data = req.body
 
-    const result = await prisma.todo.findFirst({
+    const result = await prisma.todo.findMany({
         where: {
             title: Data.title
         }
@@ -46,22 +46,30 @@ appRouter.get('/get',async(req,res)=>{
     })
 })
 
-appRouter.delete('/delelte',async(req,res)=>{
+appRouter.delete('/delete', async (req, res) => {
+    const { id } = req.body;
+    console.log(req.body)
 
-    const Data = req.body
+    if (!id) {
+        return res.status(400).json({ msg: 'ID is required' });
+    }
 
-    const result = await prisma.todo.delete({
-        where: {
-            title: Data.title
-        }
-    })
+    try {
+        const result = await prisma.todo.delete({
+            where: {
+                id: id
+            }
+        });
 
-    res.status(200).json({
-        msg: 'todo deleted',
-        data: result
-    })
-
-})
+        res.status(200).json({
+            msg: 'Todo deleted',
+            data: result
+        });
+    } catch (error) {
+        console.error('Error deleting todo:', error);
+        res.status(500).json({ msg: 'Error deleting todo' });
+    }
+});
 
 appRouter.put('/update',(req,res)=>{
 
