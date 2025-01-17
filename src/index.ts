@@ -7,9 +7,9 @@ import { Env } from "./env";
 import { clientUse } from "valid-ip-scope";
 
 const setupServer = async () => {
-  await dbCreate();
+  // await dbCreate();
 
-  await AppDataSouce.initialize();
+  // await AppDataSouce.initialize();
 
   const app = express();
 

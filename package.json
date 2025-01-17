@@ -11,6 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -19,6 +21,8 @@
     "http-status": "^1.7.4",
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
+    "prisma": "^6.2.1",
+    "react-router-dom": "^7.1.2",
     "typeorm": "^0.3.20",
     "typeorm-extension": "^3.6.1",
     "typeorm-naming-strategies": "^4.1.0",
