@@ -1,4 +1,4 @@
-# My Backend Project
+# Practice Project
 
 ## Overview
 This backend project is designed to provide a robust API for [describe the purpose, e.g., managing user data, handling transactions, etc.]. It is built using [insert technology stack, e.g., Node.js with Express, Python with Flask, etc.].
