@@ -16,11 +16,14 @@ const Signup = () => {
         username,
         password,
       });
-      const { token } = response.data;
-      localStorage.setItem('jwt', token);
+      
+      if(response.data.msg==="User Created"){
+        navigate('/login');
+      }
+      console.log(response)
       setSuccess('Signup successful!');
-      console.log('Signup successful, token:', token);
-      navigate('/home');
+      navigate('/login');
+
     } catch (error) {
       setError('Signup failed. Please try again.');
       console.error('Error during signup:', error);

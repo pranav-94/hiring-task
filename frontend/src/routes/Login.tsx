@@ -10,18 +10,18 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
     try {
       const response = await axios.post('http://localhost:8000/api/v1/login', {
         username,
         password,
       });
-      const { token } = response.data; // Assuming the token is returned in the response
-      localStorage.setItem('jwt', token); // Store the token in local storage
+      const { token } = response.data; 
+      localStorage.setItem('jwt', token);
       console.log('Login successful, token:', token);
       navigate('/home');
     } catch (error) {
-      setError('Login failed. Please check your credentials.'); // Handle error
+      setError('Login failed. Please check your credentials.'); 
       console.error('Error during login:', error);
     }
   };
