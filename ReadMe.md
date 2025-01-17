@@ -19,7 +19,7 @@ This backend project is designed to provide a robust API for [describe the purpo
 
 ### Prerequisites
 - Node.js (version X.X.X)
-- MongoDB (or any other database you are using)
+- Postgres (or any other database you are using)
 
 ### Steps
 1. Clone the repository:
