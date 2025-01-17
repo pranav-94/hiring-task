@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot } from 'recoil';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
 import Home from './routes/Home';
 import ThemeToggle from './components/Theme';
-import { themeState } from './recoil/atom';
 
 const AppTheme = () => {
   

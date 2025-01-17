@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from "@/components/ui/button"
@@ -27,7 +27,7 @@ const Home = () => {
     dueDate: '',
     userId: localStorage.getItem('id')
   });
-  const [filterDate, setFilterDate] = useState<string>('');
+  const [filterDate] = useState<string>('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   const handleLogout = () => {
