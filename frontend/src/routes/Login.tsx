@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,59 +13,65 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/api/v1/login', {
         username,
         password,
       });
-      const { token } = response.data; 
+      const { token } = response.data;
       localStorage.setItem('jwt', token);
-      localStorage.setItem('id',response.data.userId)
-      console.log('Login successful, token:', token);
+      localStorage.setItem('id', response.data.userId);
       navigate('/home');
     } catch (error) {
-      setError('Login failed. Please check your credentials.'); 
+      setError('Login failed. Please check your credentials.');
       console.error('Error during login:', error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Username:</label>
-            <input
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>Log In</CardTitle>
+        <CardDescription>Enter your credentials to access your account.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-500"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Password:</label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-500"
             />
           </div>
-          <button 
-            type="submit" 
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-          >
-            Login
-          </button>
+          <Button type="submit" className="w-full">Log In</Button>
         </form>
-        {error && <p className="text-red-500 mt-4">{error}</p>} {/* Display error message */}
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter className="flex flex-col items-center">
+        {error && <p className="text-destructive">{error}</p>}
+        <p className="mt-2 text-sm text-muted-foreground">
+          Don't have an account?{' '}
+          <Link to="/" className="text-primary hover:underline">
+            Sign up
+          </Link>
+        </p>
+      </CardFooter>
+    </Card>
   );
 };
 
-export default Login; 
+export default Login;
+
