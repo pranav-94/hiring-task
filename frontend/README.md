@@ -1,263 +1,50 @@
-# React + TypeScript + Tailwind CSS + ShadCN
+# React + TypeScript + Vite
 
-## Overview
-This project is a React application built with TypeScript, utilizing Tailwind CSS for styling and ShadCN for component design. It provides a modern and responsive user interface.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
-- Type-safe components with TypeScript
-- Responsive design using Tailwind CSS
-- Pre-built components from ShadCN
-- Fast Refresh for a smooth development experience
+Currently, two official plugins are available:
 
-## Technologies Used
-- **Language:** TypeScript
-- **Framework:** React
-- **Styling:** Tailwind CSS
-- **Component Library:** ShadCN
-- **Build Tool:** Vite
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Installation
+## Expanding the ESLint configuration
 
-### Prerequisites
-- Node.js (version X.X.X)
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/react-typescript-tailwind.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd frotend
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Run the application:
-   ```bash
-   npm run dev
-   ```
+- Configure the top-level `parserOptions` property like this:
 
-## Usage
-Once the application is running, you can access it at `http://localhost:5173` (or the port specified in your Vite configuration).
-
-
-## Testing
-To run tests for the project, use:
-```bash
-npm test
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-## Contributing
-We welcome contributions! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-## Acknowledgments
-- Thanks to the creators of Tailwind CSS, ShadCN, and Vite for their amazing tools and libraries.
-
-## API Documentation
-
-### Base URL
-The base URL for the API is `http://localhost:3000/` (or the port specified in your server configuration).
-
-### Endpoints
-
-#### User Authentication
-
-- **POST /signup**
-  - **Description:** Create a new user.
-  - **Request Body:**
-    ```json
-    {
-      "username": "string",
-      "password": "string"
-    }
-    ```
-  - **Response:**
-    - **201 Created**
-      ```json
-      {
-        "msg": "User created",
-        "data": {
-          "id": "number",
-          "username": "string"
-        }
-      }
-      ```
-    - **500 Internal Server Error**
-      ```json
-      {
-        "msg": "Error creating user"
-      }
-      ```
-
-- **POST /login**
-  - **Description:** Log in a user and return a token.
-  - **Request Body:**
-    ```json
-    {
-      "username": "string",
-      "password": "string"
-    }
-    ```
-  - **Response:**
-    - **200 OK**
-      ```json
-      {
-        "msg": "Login successful",
-        "token": "string",
-        "userId": "number"
-      }
-      ```
-    - **401 Unauthorized**
-      ```json
-      {
-        "msg": "Invalid credentials"
-      }
-      ```
-    - **500 Internal Server Error**
-      ```json
-      {
-        "msg": "Error during login"
-      }
-      ```
-
-#### Todo Management
-
-- **POST /post**
-  - **Description:** Create a new todo item.
-  - **Request Body:**
-    ```json
-    {
-      "title": "string",
-      "description": "string",
-      "status": "string",
-      "dueDate": "string",
-      "userId": "number"
-    }
-    ```
-  - **Response:**
-    - **200 OK**
-      ```json
-      {
-        "msg": "Todo created",
-        "data": {
-          // Todo item details
-        }
-      }
-      ```
-    - **500 Internal Server Error**
-      ```json
-      {
-        "msg": "Error creating todo"
-      }
-      ```
-
-- **GET /get**
-  - **Description:** Retrieve todos for a specific user.
-  - **Query Parameters:**
-    - `userId`: The ID of the user.
-  - **Response:**
-    - **200 OK**
-      ```json
-      {
-        "msg": "Todos found",
-        "data": [
-          // Array of todo items
-        ]
-      }
-      ```
-    - **500 Internal Server Error**
-      ```json
-      {
-        "msg": "Error fetching todos"
-      }
-      ```
-
-- **DELETE /delete**
-  - **Description:** Delete a todo item.
-  - **Request Body:**
-    ```json
-    {
-      "id": "number",
-      "userId": "number"
-    }
-    ```
-  - **Response:**
-    - **200 OK**
-      ```json
-      {
-        "msg": "Todo deleted",
-        "data": {
-          // Deletion result
-        }
-      }
-      ```
-    - **400 Bad Request**
-      ```json
-      {
-        "msg": "ID and userId are required"
-      }
-      ```
-    - **404 Not Found**
-      ```json
-      {
-        "msg": "Todo not found or not authorized to delete"
-      }
-      ```
-    - **500 Internal Server Error**
-      ```json
-      {
-        "msg": "Error deleting todo"
-      }
-      ```
-
-- **PUT /update**
-  - **Description:** Update an existing todo item.
-  - **Request Body:**
-    ```json
-    {
-      "id": "number",
-      "title": "string",
-      "description": "string",
-      "status": "string",
-      "dueDate": "string",
-      "userId": "number"
-    }
-    ```
-  - **Response:**
-    - **200 OK**
-      ```json
-      {
-        "msg": "Todo updated",
-        "data": {
-          // Update result
-        }
-      }
-      ```
-    - **400 Bad Request**
-      ```json
-      {
-        "msg": "ID and userId are required"
-      }
-      ```
-    - **404 Not Found**
-      ```json
-      {
-        "msg": "Todo not found or not authorized to update"
-      }
-      ```
-    - **500 Internal Server Error**
-      ```json
-      {
-        "msg": "Error updating todo"
-      }
-      ```
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```

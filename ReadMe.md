@@ -45,13 +45,107 @@ This backend project is designed to provide a robust API for [describe the purpo
    ```
 
 ## API Documentation
-### Example Endpoints
-- `GET /api/users` - Retrieve a list of users.
-- `POST /api/users` - Create a new user.
-- `GET /api/users/:id` - Retrieve a user by ID.
-- `PUT /api/users/:id` - Update a user by ID.
-- `DELETE /api/users/:id` - Delete a user by ID.
 
+### Todo Endpoints
+- `POST /api/post` - Create a new todo.
+  - **Request Body:**
+    ```json
+    {
+      "title": "string",
+      "description": "string",
+      "status": "string",
+      "dueDate": "string",
+      "userId": "number"
+    }
+    ```
+  - **Response:**
+    ```json
+    {
+      "msg": "Todo created",
+      "data": { /* todo object */ }
+    }
+    ```
+
+- `GET /api/get` - Retrieve todos for a specific user.
+  - **Query Parameters:**
+    - `userId`: The ID of the user.
+  - **Response:**
+    ```json
+    {
+      "msg": "Todos found",
+      "data": [ /* array of todo objects */ ]
+    }
+    ```
+
+- `DELETE /api/delete` - Delete a specific todo.
+  - **Request Body:**
+    ```json
+    {
+      "id": "number",
+      "userId": "number"
+    }
+    ```
+  - **Response:**
+    ```json
+    {
+      "msg": "Todo deleted",
+      "data": { /* result object */ }
+    }
+    ```
+
+- `PUT /api/update` - Update a specific todo.
+  - **Request Body:**
+    ```json
+    {
+      "id": "number",
+      "title": "string",
+      "description": "string",
+      "status": "string",
+      "dueDate": "string",
+      "userId": "number"
+    }
+    ```
+  - **Response:**
+    ```json
+    {
+      "msg": "Todo updated",
+      "data": { /* result object */ }
+    }
+    ```
+
+### Authentication Endpoints
+- `POST /api/signup` - Create a new user account.
+  - **Request Body:**
+    ```json
+    {
+      "username": "string",
+      "password": "string"
+    }
+    ```
+  - **Response:**
+    ```json
+    {
+      "msg": "User created",
+      "data": { "id": "number", "username": "string" }
+    }
+    ```
+
+- `POST /api/login` - Log in a user.
+  - **Request Body:**
+    ```json
+    {
+      "username": "string",
+      "password": "string"
+    }
+    ```
+  - **Response:**
+    ```json
+    {
+      "msg": "Login successful",
+      "token": "string",
+      "userId": "number"
+    }
+    ```
 
 ## Contributing
 We welcome contributions! Please follow these steps:
