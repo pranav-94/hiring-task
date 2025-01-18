@@ -14,11 +14,6 @@ const setupServer = async () => {
   const app = express();
 
   app.use(cors());
-app.use(cors({
-  origin: 'https://classytodo.vercel.app/',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
-}));
 
   app.use(express.json());
   app.use(clientUse());
